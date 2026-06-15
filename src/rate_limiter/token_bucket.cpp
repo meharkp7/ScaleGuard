@@ -67,6 +67,7 @@ bool TokenBucket::allowRequest(
         );
 
     if (tokens < 1) {
+        Metrics::rejected_requests++;
         return false;
     }
 
