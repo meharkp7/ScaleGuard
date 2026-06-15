@@ -26,3 +26,9 @@ add_executable(test_storage
 )
 
 target_link_libraries(test_storage PRIVATE storage)
+
+add_executable(test_redis
+    tests/test_redis_store.cpp
+)
+
+target_link_libraries(test_redis PRIVATE storage)
