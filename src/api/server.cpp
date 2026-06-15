@@ -1,5 +1,5 @@
 #include "api/server.h"
-
+#include "metrics/metrics.h"
 #include <crow.h>
 
 Server::Server(
@@ -46,6 +46,20 @@ void Server::start(int port) {
             result
         );
     });
+
+    CROW_ROUTE(app, "/metrics")
+        ([]() {
+
+            crow::json::wvalue result;
+
+            result["allowed_requests"] =
+                Metrics::allowed_requests.load();
+
+            result["rejected_requests"] =
+                Metrics::rejected_requests.load();
+
+            return crow::response(result);
+        });
 
     app.port(port)
        .multithreaded()

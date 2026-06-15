@@ -1,7 +1,7 @@
 #pragma once
 
 #include "storage/storage.h"
-
+#include "metrics/metrics.h"
 #include <memory>
 #include <mutex>
 #include <string>

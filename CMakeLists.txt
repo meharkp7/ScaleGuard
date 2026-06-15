@@ -69,3 +69,7 @@ target_link_libraries(
     storage
     Crow::Crow
 )
+
+add_executable(benchmark_throughput
+    benchmarks/throughput.cpp
+)

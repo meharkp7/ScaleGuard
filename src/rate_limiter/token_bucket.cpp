@@ -1,5 +1,5 @@
 #include "rate_limiter/token_bucket.h"
-
+#include "metrics/metrics.h"
 #include <algorithm>
 #include <chrono>
 
@@ -82,5 +82,6 @@ bool TokenBucket::allowRequest(
         std::to_string(now)
     );
 
+    Metrics::allowed_requests++;
     return true;
 }
