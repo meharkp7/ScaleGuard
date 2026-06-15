@@ -55,3 +55,17 @@ target_link_libraries(
     PRIVATE
     storage
 )
+
+add_executable(scaleguard
+    src/main.cpp
+    src/api/server.cpp
+)
+
+find_package(Crow CONFIG REQUIRED)
+
+target_link_libraries(
+    scaleguard
+    PRIVATE
+    storage
+    Crow::Crow
+)
