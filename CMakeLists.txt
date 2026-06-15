@@ -61,15 +61,18 @@ add_executable(scaleguard
     src/api/server.cpp
 )
 
-find_package(Crow CONFIG REQUIRED)
-
 target_link_libraries(
     scaleguard
     PRIVATE
     storage
-    Crow::Crow
 )
 
 add_executable(benchmark_throughput
     benchmarks/throughput.cpp
+)
+
+target_include_directories(
+    scaleguard
+    PRIVATE
+    third_party
 )

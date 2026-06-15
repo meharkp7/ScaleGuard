@@ -1,5 +1,5 @@
 #include "storage/redis_store.h"
-
+#include <mutex>
 #include <stdexcept>
 
 RedisStore::RedisStore(
