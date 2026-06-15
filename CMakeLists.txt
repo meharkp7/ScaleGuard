@@ -16,6 +16,7 @@ add_library(storage
     src/storage/memory_store.cpp
     src/storage/redis_store.cpp
     src/rate_limiter/token_bucket.cpp
+    src/rate_limiter/fixed_window.cpp
 )
 
 target_include_directories(storage PUBLIC include)
@@ -41,6 +42,16 @@ add_executable(test_token_bucket
 
 target_link_libraries(
     test_token_bucket
+    PRIVATE
+    storage
+)
+
+add_executable(test_fixed_window
+    tests/test_fixed_window.cpp
+)
+
+target_link_libraries(
+    test_fixed_window
     PRIVATE
     storage
 )
