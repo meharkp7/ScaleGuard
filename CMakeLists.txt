@@ -15,6 +15,7 @@ include_directories(include /opt/homebrew/include)
 add_library(storage
     src/storage/memory_store.cpp
     src/storage/redis_store.cpp
+    src/rate_limiter/token_bucket.cpp
 )
 
 target_include_directories(storage PUBLIC include)
@@ -32,3 +33,14 @@ add_executable(test_redis
 )
 
 target_link_libraries(test_redis PRIVATE storage)
+
+add_executable(test_token_bucket
+    tests/test_token_bucket.cpp
+    src/rate_limiter/token_bucket.cpp
+)
+
+target_link_libraries(
+    test_token_bucket
+    PRIVATE
+    storage
+)
