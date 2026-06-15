@@ -91,6 +91,87 @@ ScaleGuard/
 ```
 
 ---
+## 🎬 Demo
+
+### Start Services
+
+```bash
+docker compose up
+```
+
+Output:
+
+```text
+redis-1       | Ready to accept connections tcp
+scaleguard-1 | Server started on port 8080
+```
+
+---
+
+### Health Check
+
+```bash
+curl localhost:5001/health
+```
+
+Output:
+
+```text
+OK
+```
+
+---
+
+### Rate Limiting
+
+```bash
+for i in {1..15}
+do
+  curl -s -X POST localhost:5001/allow \
+  -H "Content-Type: application/json" \
+  -d '{"user_id":"mehar"}'
+  echo
+done
+```
+
+Output:
+
+```text
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":true}
+{"allowed":false}
+{"allowed":false}
+{"allowed":false}
+{"allowed":false}
+{"allowed":false}
+```
+
+---
+
+### Metrics
+
+```bash
+curl localhost:5001/metrics
+```
+
+Output:
+
+```json
+{
+  "allowed_requests": 10,
+  "rejected_requests": 5
+}
+```
+
+---
 
 ## ⚙️ Supported Algorithms
 
